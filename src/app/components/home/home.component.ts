@@ -83,9 +83,36 @@ export class HomeComponent implements OnInit {
   }
 
   submitData() {
-    if (this.files && this.files.size > 0) {
+    if (this.arquivoXML && this.arquivoXML.size > 0) {
       var reader = new FileReader();
-      this.service.upload(this.files, "url").subscribe(response => console.log('Upload Concluído'));
+
+
+      this.service.upload(this.arquivoXML, "localhost:8080").subscribe(response => console.log('Upload Concluído'));
+
+     /* for (let i=0; i < this.files.size; i++) {
+        this.files[i].text().then((data) => {
+          //this.filesXML.add(data.toString());
+                  
+          // Converte XML em JSON
+          var convert = require('xml-js');
+          var arquivoXML2 = convert.xml2js(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
+          console.log(arquivoXML2);
+  
+          //console.log(arquivoXML2.agentes.agente[0].regiao.precoMedio = null);
+  
+          // Acessar no multi agentes
+          //console.log(arquivoXML2.agentes.agente[0].regiao[0].precoMedio.valor[0])
+  
+          // Acessar no single agentes
+          //console.log(arquivoXML2.agentes.agente.regiao[0].precoMedio.valor[0]);
+  
+          this.arquivoXML.add(arquivoXML2.agentes);
+  
+          console.log(this.arquivoXML);
+          this.service.upload(this.arquivoXML, "localhost:8080").subscribe(response => console.log('Upload Concluído'));
+        });
+        console.log("depois");
+      }*/
     }
   }
 }
