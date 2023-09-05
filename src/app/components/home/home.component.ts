@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   name: string = "";
   files: Set<File>;
   filesXML: Set<string>;
-  arquivoXML: ArquivoXML;
+  arquivoXML: Set<Agente> = new Set();
 
   getName(name: string) {
     this.name = name;
@@ -47,20 +47,26 @@ export class HomeComponent implements OnInit {
                 
         // Converte XML em JSON
         var convert = require('xml-js');
-        var result = convert.xml2json(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
-        console.log(result);
-        console.log(typeof result);
+        var arquivoXML2 = convert.xml2js(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
+        console.log(arquivoXML2);
 
-        // Transforma o JSON em Objeto JS
-        this.arquivoXML = JSON.parse(result);
+        //console.log(arquivoXML2.agentes.agente[0].regiao.precoMedio = null);
 
+        // Acessar no multi agentes
+        //console.log(arquivoXML2.agentes.agente[0].regiao[0].precoMedio.valor[0])
 
-        // Imprime o JSON no console
+        // Acessar no single agentes
+        //console.log(arquivoXML2.agentes.agente.regiao[0].precoMedio.valor[0]);
+
+        this.arquivoXML.add(arquivoXML2.agentes);
+
         console.log(this.arquivoXML);
+        // Imprime o JSON no console
+        /*console.log(this.arquivoXML);
         console.log(typeof this.arquivoXML.agentes[0]);
         Object.keys(this.arquivoXML).forEach((regiao) => {
           console.log(regiao);
-        });
+        });*/
       });
       console.log("depois");
       
