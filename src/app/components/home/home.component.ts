@@ -1,9 +1,13 @@
+import { Regiao } from './../../models/Regiao';
+import { PrecoMedio } from './../../models/PrecoMedio';
 import { XmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { xml2js } from 'xml-js';
 import { UploadFileService } from './uploadFile.service';
 import { readFileSync } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
+import { Agente } from 'src/app/models/Agente';
+import { ArquivoXML } from 'src/app/models/ArquivoXML';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +26,7 @@ export class HomeComponent implements OnInit {
   name: string = "";
   files: Set<File>;
   filesXML: Set<string>;
+  arquivoXML: ArquivoXML;
 
   getName(name: string) {
     this.name = name;
@@ -38,19 +43,27 @@ export class HomeComponent implements OnInit {
       fileNames.push(selectedFiles[i].name);
       this.files.add(selectedFiles[i]);   
       selectedFiles[i].text().then((data) => {
-        console.log("durante");
-        console.log(data)
-        this.filesXML.add(data.toString());
-        console.log("logo após");
-        const options = {
-          ignoreAttributes: false,
-          attributeNamePrefix : "@_"
-        };
-        const parser = new XMLParser(options);
-        const output = parser.parse(data.toString());
-        console.log("Meu JSON", output)
+        //this.filesXML.add(data.toString());
+                
+        // Converte XML em JSON
+        var convert = require('xml-js');
+        var result = convert.xml2json(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
+        console.log(result);
+        console.log(typeof result);
+
+        // Transforma o JSON em Objeto JS
+        this.arquivoXML = JSON.parse(result);
+
+
+        // Imprime o JSON no console
+        console.log(this.arquivoXML);
+        console.log(typeof this.arquivoXML.agentes[0]);
+        Object.keys(this.arquivoXML).forEach((regiao) => {
+          console.log(regiao);
+        });
       });
       console.log("depois");
+      
 
     }
     console.log("depois2");
