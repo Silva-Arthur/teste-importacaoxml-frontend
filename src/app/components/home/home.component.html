@@ -1,6 +1,6 @@
 <p>home works!</p>
 <div>    
-    <input type="text" (change)="getName(name.value)" #name/>
-    <input type="file" id="arquivos" (change)="getFile($event)" multiple="multiple" accept="text/xml"/>
-    <input type="button" (click)="submitData()" value="Importar Arquivo">
+    <input type="text" (change)="getName(name.value)" id="fileLabel" name="fileLabel" #name/>
+    <input type="file" id="arquivos" name="arquivos" (change)="getFile($event)" multiple="multiple" accept="text/xml"/>
+    <input type="button" (click)="submitData()" value="Importar Arquivo" [disabled]="!files">
 </div>
