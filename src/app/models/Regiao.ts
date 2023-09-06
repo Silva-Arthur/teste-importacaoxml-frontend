@@ -3,7 +3,7 @@ import { Geracao } from "./Geracao";
 import { PrecoMedio } from "./PrecoMedio";
 
 export class Regiao {
-    sigla: String;
+    sigla: string;
     geracao: Geracao = new Geracao();
     compra: Compra = new Compra();
     precoMedio: PrecoMedio = new PrecoMedio();
