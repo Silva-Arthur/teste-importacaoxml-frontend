@@ -3,6 +3,9 @@ import { ConversorService } from './../../services/ConversorService';
 import { Component, OnInit } from '@angular/core';
 import { UploadFileService } from './home.service';
 import * as X2JS from 'x2js';
+import { Observable } from 'rxjs';
+import { delay} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
@@ -15,13 +18,15 @@ export class HomeComponent implements OnInit {
     private service: UploadFileService
     ) { }
     
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.retorno$ = true;
   }
   
   name: string = "";
   files: Set<File>;
   arquivosJson: Array<any> = new Array();
   conversor: ConversorService = new ConversorService();
+  retorno$: Observable<boolean> | boolean;
 
   getName(name: string) {
     this.name = name;
@@ -46,18 +51,18 @@ export class HomeComponent implements OnInit {
     document.getElementById('arquivos').innerHTML = fileNames.join(', ');
   }
 
-  enviarArquivos() {
+  async enviarArquivos() {
+    this.retorno$ = false;
     if (this.arquivosJson && this.arquivosJson.length > 0) {
       for (var jsonFile of this.arquivosJson) {
         var jsonAux = this.conversor.converter(jsonFile)
-        this.service.upload(jsonAux, "http://localhost:8080/upload").subscribe(response => console.log('Upload Concluído'));        
+        var retornoFuncao = await this.service.upload(jsonAux, "http://localhost:8080/upload");        
+        console.log(retornoFuncao)
       }
     }
     this.arquivosJson = new Array();
     this.files = null;
-    document.getElementById('arquivos').innerHTML = '';
-    document.getElementById('fileLabel').innerHTML = '';
-    document.getElementById('buttonSubmit').setAttribute('disabled', '');
+    this.retorno$ = true;  
   }
 
 }
