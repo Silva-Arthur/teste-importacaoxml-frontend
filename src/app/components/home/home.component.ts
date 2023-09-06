@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
       var reader = new FileReader();
 
 
-      this.service.upload(this.arquivoXML, "localhost:8080").subscribe(response => console.log('Upload Concluído'));
+      this.service.upload(this.arquivoXML, "http://localhost:8080/upload").subscribe(response => console.log('Upload Concluído'));
 
      /* for (let i=0; i < this.files.size; i++) {
         this.files[i].text().then((data) => {

@@ -14,6 +14,7 @@ export class UploadFileService {
     files.forEach(file => formData.append('file', file, file.name));
 
     const request = new HttpRequest("POST", url, formData);*/
+    console.log(agentes);
     return this.http.post<any>(url, agentes);
   }
 }
