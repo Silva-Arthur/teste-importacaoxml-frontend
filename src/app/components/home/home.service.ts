@@ -12,11 +12,7 @@ export class UploadFileService {
 
   constructor(private http: HttpClient) { }
 
-  upload(jsonEnviar: any, url: string) {
-    return this.http.post(url, jsonEnviar,{responseType: 'text'}).pipe(
-      //first(),
-      //delay(15000),
-      tap(retorno => console.log(retorno))
-    );
+  async upload(jsonEnviar: any, url: string) {
+    return await this.http.post(url, jsonEnviar,{responseType: 'text'}).toPromise();
   }
 }

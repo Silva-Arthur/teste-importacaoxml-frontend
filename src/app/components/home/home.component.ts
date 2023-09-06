@@ -56,15 +56,13 @@ export class HomeComponent implements OnInit {
     if (this.arquivosJson && this.arquivosJson.length > 0) {
       for (var jsonFile of this.arquivosJson) {
         var jsonAux = this.conversor.converter(jsonFile)
-        this.service.upload(jsonAux, "http://localhost:8080/upload").subscribe(response => console.log('Upload Concluído'));        
+        var retornoFuncao = await this.service.upload(jsonAux, "http://localhost:8080/upload");        
+        console.log(retornoFuncao)
       }
     }
     this.arquivosJson = new Array();
     this.files = null;
-    document.getElementById('arquivos').innerHTML = '';
-    document.getElementById('buttonSubmit').setAttribute('disabled', '');
-    console.log('aqui')
-    this.retorno$ = true;
+    this.retorno$ = true;  
   }
 
 }
