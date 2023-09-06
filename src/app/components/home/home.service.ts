@@ -14,8 +14,8 @@ export class UploadFileService {
 
   upload(jsonEnviar: any, url: string) {
     return this.http.post(url, jsonEnviar,{responseType: 'text'}).pipe(
-      first(),
-      delay(15000),
+      //first(),
+      //delay(15000),
       tap(retorno => console.log(retorno))
     );
   }

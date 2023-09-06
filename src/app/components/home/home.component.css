@@ -5,13 +5,23 @@
     text-align: center;
 }
 
-input {
+
+#arquivos {
     border: solid 1px rgba(129, 128, 128, 0.226);
+    margin: 3rem;
 }
+
+input::file-selector-button {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(1, 4, 7);
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+  }
+  
 
 .loading-spinner {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.15);
 }
