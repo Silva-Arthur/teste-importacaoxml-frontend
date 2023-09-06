@@ -1,5 +1,3 @@
-import { Valor } from "./Valor";
-
 export class PrecoMedio {
-    valor: Array<Valor> = new Array();
+    valor: Array<string> = new Array();
 }
