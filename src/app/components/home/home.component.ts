@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   files: Set<File>;
   filesXML: Set<string>;
   arquivoXML: Set<Agente> = new Set();
+  jsonEnviar: string = "";
 
   getName(name: string) {
     this.name = name;
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
         // Converte XML em JSON
         var convert = require('xml-js');
         var arquivoXML2 = convert.xml2js(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
+        this.jsonEnviar = convert.xml2json(data.toString().replace('<?xml version="1.0" encoding="UTF-8"?>', ''), {compact: true, spaces: 1});
         console.log(arquivoXML2);
 
         //console.log(arquivoXML2.agentes.agente[0].regiao.precoMedio = null);
@@ -87,7 +89,7 @@ export class HomeComponent implements OnInit {
       var reader = new FileReader();
 
 
-      this.service.upload(this.arquivoXML, "http://localhost:8080/upload").subscribe(response => console.log('Upload Concluído'));
+      this.service.upload(this.arquivoXML, "http://localhost:8080/upload", this.jsonEnviar).subscribe(response => console.log('Upload Concluído'));
 
      /* for (let i=0; i < this.files.size; i++) {
         this.files[i].text().then((data) => {

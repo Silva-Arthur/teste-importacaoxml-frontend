@@ -9,12 +9,13 @@ export class UploadFileService {
 
   constructor(private http: HttpClient) { }
 
-  upload(agentes: Set<Agente>, url: string) {
+  upload(agentes: Set<Agente>, url: string, jsonEnviar: string) {
     /*const formData = new FormData();
     files.forEach(file => formData.append('file', file, file.name));
 
     const request = new HttpRequest("POST", url, formData);*/
     console.log(agentes);
-    return this.http.post<any>(url, agentes);
+    console.log(jsonEnviar)
+    return this.http.post<any>(url, jsonEnviar);
   }
 }
