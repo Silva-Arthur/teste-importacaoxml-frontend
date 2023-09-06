@@ -1,6 +1,21 @@
-<p>home works!</p>
-<div>    
-    <!--<input type="text" (change)="getName(name.value)" id="fileLabel" name="fileLabel" #name/>-->
-    <input type="file" id="arquivos" name="arquivos" (change)="getFile($event)" multiple="multiple" accept="text/xml"/>
-    <input type="button" (click)="enviarArquivos()" value="Importar Arquivo" [disabled]="!files" id="buttonSubmit" name="buttonSubmit">
+<div>
+    <div class="form">
+        <h1>Sistema de Processamento de XML Teste CCEE</h1>
+    </div>
+    <div class="form">
+        <h2>Arthur Silva</h2>
+        <!--<input type="text" (change)="getName(name.value)" id="fileLabel" name="fileLabel" #name/>-->
+        <input type="file" class="ng-hide" id="arquivos" name="arquivos" (change)="getFile($event)" multiple="multiple"
+            accept="text/xml" />
+        <button (click)="enviarArquivos()" mat-raised-button color="primary" [disabled]="!files" id="buttonSubmit"
+            name="buttonSubmit">Importar Arquivo</button>
+        <div *ngIf=""></div>
+    
+    </div>
+    <ng-template #loading>
+        <div class="loading-spinner">
+            <mat-spinner></mat-spinner>
+        </div>
+        </ng-template>
+
 </div>
